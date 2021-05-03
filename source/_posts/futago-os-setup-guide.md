@@ -62,7 +62,7 @@ Because VirtualBox just works.
 在继续阅读之前，我假定你已满足以下条件：
 
 - 有 GNU/Linux 的操作基础，懂得 shell 的基本操作及一些常用命令行工具的用法，会使用 vi 或 nano 编辑器在终端进行简单的文本编辑。
-- 姐姐机机上安装有 OpenSSH，Windows 自带的或者是 MSYS（Git for Windows）的都可以，如果选择后者需要使用 mintty 作为终端模拟器。
+- 姐姐机上安装有 OpenSSH，Windows 自带的或者是 MSYS（Git for Windows）的都可以，如果选择后者需要使用 mintty 作为终端模拟器。
 - 有基本的 RTFM 和 STFW 能力。
 - 有较好的网络环境。
 
@@ -78,7 +78,7 @@ Because VirtualBox just works.
 
 ## 神说，要有光
 
-1. 打开 VirtualBox，「新建」。名称建议和你想给妹妹机机起的 hostname 一致。本文将妹妹机机命名为 `Suyun-VM`。类型选择 `Linux`，版本选择 `Other Linux (64-bit)`。下一步。
+1. 打开 VirtualBox，「新建」。名称建议和你想给妹妹机起的 hostname 一致。本文将妹妹机命名为 `Suyun-VM`。类型选择 `Linux`，版本选择 `Other Linux (64-bit)`。下一步。
 2. 内存大小建议根据实际情况，本文分配了 2 GB。
 3. 进入虚拟硬盘分配页面，选择「现在创建虚拟硬盘」，创建。建议选择 VirtualBox 自家的 VDI 格式。下一步。
 4. 本文选择「动态分配」。下一步。
@@ -86,7 +86,7 @@ Because VirtualBox just works.
 
 创建完成后，需要做一些额外的设置。
 
-1. 「系统」->「处理器」：处理器数量设为和姐姐机机一样的数量，运行峰值设为 100%。
+1. 「系统」->「处理器」：处理器数量设为和姐姐机一样的数量，运行峰值设为 100%。
 2. 「显示」->「屏幕」：显存大小设为 4 MB。
 3. 「存储」：如果姐姐机用的是 SSD，勾选固态驱动器。
 4. 「声音」：取消勾选启用声音。
