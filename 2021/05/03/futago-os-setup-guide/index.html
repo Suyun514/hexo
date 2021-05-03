@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>双子系统环境安装指南 | 苏云不知道自己是不是姐姐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文旨在提供一个构建以 Windows 10 Enterprise LTSC x64 为宿主机，以 VirtualBox 为驱动，拥有 Apline Linux x64 虚拟机的双子系统环境的安装指南。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双子系统环境安装指南">
+<meta property="og:url" content="https://suyun114.gitlab.io/hexo/2021/05/03/futago-os-setup-guide/index.html">
+<meta property="og:site_name" content="苏云不知道自己是不是姐姐">
+<meta property="og:description" content="本文旨在提供一个构建以 Windows 10 Enterprise LTSC x64 为宿主机，以 VirtualBox 为驱动，拥有 Apline Linux x64 虚拟机的双子系统环境的安装指南。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://suyun114.gitlab.io/hexo/2021/05/03/futago-os-setup-guide/futago-os-setup-guide/screenshot.png">
+<meta property="article:published_time" content="2021-05-03T13:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-03T13:34:09.337Z">
+<meta property="article:author" content="Suyun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://suyun114.gitlab.io/hexo/2021/05/03/futago-os-setup-guide/futago-os-setup-guide/screenshot.png">
+  
+    <link rel="alternate" href="/hexo/atom.xml" title="苏云不知道自己是不是姐姐" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/hexo/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/hexo/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/hexo/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/hexo/" id="logo">苏云不知道自己是不是姐姐</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/hexo/">Home</a>
+        
+          <a class="main-nav-link" href="/hexo/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/hexo/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://suyun114.gitlab.io/hexo"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-futago-os-setup-guide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hexo/2021/05/03/futago-os-setup-guide/" class="article-date">
+  <time class="dt-published" datetime="2021-05-03T13:00:00.000Z" itemprop="datePublished">2021-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/hexo/categories/Ops/">Ops</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      双子系统环境安装指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文旨在提供一个构建以 Windows 10 Enterprise LTSC x64 为宿主机，以 VirtualBox 为驱动，拥有 Apline Linux x64 虚拟机的双子系统环境的安装指南。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>本文在很大程度上参考了 <a target="_blank" rel="noopener" href="https://ekyu.moe/">Equim</a> 的 <a target="_blank" rel="noopener" href="https://ekyu.moe/article/futago-system-kari-setup-guide/">双子系统(仮)环境安装指南</a>（使用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans">CC-BY-NC 4.0</a> 协议）。在此感谢 Equim。</p>
+</blockquote>
+<h1 id="关于双子系统"><a href="#关于双子系统" class="headerlink" title="关于双子系统"></a>关于双子系统</h1><p>双子系统的宗旨是尽可能使得姐姐机（Windows 10）和妹妹机（Apline Linux in VirtualBox）能较为无缝的集成在一起，以此让 Windows 和 Linux 都扬长避短，最大化各自的优点。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>扬长避短：同时体验 Windows 优秀的图形界面和软件生态，与 Linux 对 Dev 和 Ops 的天生优势。</li>
+<li>安全快捷：姐姐机可以通过 NAT 保护妹妹机；也可以通过 VM 的快照功能方便地对妹妹机进行备份和恢复。</li>
+<li>直接利用姐姐机的网络甚至代理，无需复杂的设置。</li>
+<li>无界面，无需复杂的显卡和图形环境设置。</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>无法更高效地榨干硬件，无法利用 GPU。</li>
+<li>无法方便、稳定地共享文件。</li>
+<li>无法完美地使用 GUI。</li>
+</ol>
+<h1 id="Why-not-something"><a href="#Why-not-something" class="headerlink" title="Why not something"></a>Why not something</h1><h2 id="Why-not-WSL"><a href="#Why-not-WSL" class="headerlink" title="Why not WSL"></a>Why not WSL</h2><ul>
+<li>无法方便地使用其他 Linux 发行版。</li>
+<li>不知道 Microsoft 魔改了多少。</li>
+</ul>
+<h2 id="Why-not-Cygwin-MSYS2"><a href="#Why-not-Cygwin-MSYS2" class="headerlink" title="Why not Cygwin / MSYS2"></a>Why not Cygwin / MSYS2</h2><p>咱目前就在使用基于 MSYS2 的 Git for Windows，在后文中也使用 Git for Windows 提供的 OpenSSH 客户端。但是咱在日常使用中，仍然遇到了一些小问题：</p>
+<p>MSYS2 和 Windows 在终端层面上不兼容：如果尝试在 MSYS2 的 mintty 下使用 Windows 版的 Node.js，你会发现 REPL prompt 始终不会出现，如果尝试使用 PowerShell，那么退出之后方向键的行为会变得不正常……虽然可以使用 winpty 和「experimental support」在部分程度上解决问题，但是仍然和正常的 Windows 终端有差别，更别提「but it still has known bugs」了。</p>
+<p>以及需要同时安装多个<del>鬼知道区别在哪里的</del>版本的软件。比如，Python 就有 Windows 版、Cygwin 版和 MSYS2 版；Git 同样有三个版本，Windows 版甚至还自带了一套魔改过的 MSYS2……</p>
+<p>咱觉得，还是养在 VM 里的 Linux 更加正经一些。</p>
+<h2 id="Why-not-VMWare"><a href="#Why-not-VMWare" class="headerlink" title="Why not VMWare"></a>Why not VMWare</h2><p>Because VirtualBox just works.</p>
+<h2 id="Why-Alpine"><a href="#Why-Alpine" class="headerlink" title="Why Alpine"></a>Why Alpine</h2><ul>
+<li>简洁、轻量。</li>
+<li>对虚拟机有专门的优化。</li>
+<li>安装比 Gentoo 和 Arch Linux 之流相对方便。</li>
+</ul>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="先验条件断言"><a href="#先验条件断言" class="headerlink" title="先验条件断言"></a>先验条件断言</h2><p>在继续阅读之前，我假定你已满足以下条件：</p>
+<ul>
+<li>有 GNU/Linux 的操作基础，懂得 shell 的基本操作及一些常用命令行工具的用法，会使用 vi 或 nano 编辑器在终端进行简单的文本编辑。</li>
+<li>姐姐机机上安装有 OpenSSH，Windows 自带的或者是 MSYS（Git for Windows）的都可以，如果选择后者需要使用 mintty 作为终端模拟器。</li>
+<li>有基本的 RTFM 和 STFW 能力。</li>
+<li>有较好的网络环境。</li>
+</ul>
+<h2 id="打开-CPU-虚拟化"><a href="#打开-CPU-虚拟化" class="headerlink" title="打开 CPU 虚拟化"></a>打开 CPU 虚拟化</h2><h2 id="安装-VirtualBox"><a href="#安装-VirtualBox" class="headerlink" title="安装 VirtualBox"></a>安装 VirtualBox</h2><h2 id="下载-Alpine-Linux-镜像"><a href="#下载-Alpine-Linux-镜像" class="headerlink" title="下载 Alpine Linux 镜像"></a>下载 Alpine Linux 镜像</h2><p>可以从 <a target="_blank" rel="noopener" href="https://alpinelinux.org/downloads/">downloads | Alpine Linux</a>，也可以使用 <a target="_blank" rel="noopener" href="https://opentuna.cn/">OpenTUNA</a> 等国内镜像源，建议下载带 <code>virt</code> 的版本。</p>
+<blockquote>
+<p>注意校验 SHA1 或 PGP 签名。</p>
+</blockquote>
+<h2 id="神说，要有光"><a href="#神说，要有光" class="headerlink" title="神说，要有光"></a>神说，要有光</h2><ol>
+<li>打开 VirtualBox，「新建」。名称建议和你想给妹妹机机起的 hostname 一致。本文将妹妹机机命名为 <code>Suyun-VM</code>。类型选择 <code>Linux</code>，版本选择 <code>Other Linux (64-bit)</code>。下一步。</li>
+<li>内存大小建议根据实际情况，本文分配了 2 GB。</li>
+<li>进入虚拟硬盘分配页面，选择「现在创建虚拟硬盘」，创建。建议选择 VirtualBox 自家的 VDI 格式。下一步。</li>
+<li>本文选择「动态分配」。下一步。</li>
+<li>空间大小建议根据实际情况，本文分配了 64 GB。</li>
+</ol>
+<p>创建完成后，需要做一些额外的设置。</p>
+<ol>
+<li>「系统」-&gt;「处理器」：处理器数量设为和姐姐机机一样的数量，运行峰值设为 100%。</li>
+<li>「显示」-&gt;「屏幕」：显存大小设为 4 MB。</li>
+<li>「存储」：如果姐姐机用的是 SSD，勾选固态驱动器。</li>
+<li>「声音」：取消勾选启用声音。</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>启动虚拟机，会提示选择光盘，选择之前下载好的 Alpine Linux 镜像。</p>
+<p>启动完成后，用 <code>root</code> 空密码登录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> setup-alpine</span></span><br></pre></td></tr></table></figure>
+
+<p>依次设置：</p>
+<ol>
+<li>键盘布局：<code>none</code></li>
+<li>主机名：<code>localhost</code>（这里不支持大写主机名，后面再改）</li>
+<li>网卡：<code>eth0</code></li>
+<li>IP 地址：<code>dhcp</code></li>
+<li>是否设置网络：<code>n</code></li>
+<li><code>root</code> 密码</li>
+<li>时区：<code>Asia/Shanghai</code></li>
+<li>代理：<code>none</code></li>
+<li>NTP 客户端：<code>chrony</code></li>
+<li>软件源：<code>1</code></li>
+<li>SSH 服务端：<code>openssh</code></li>
+<li>硬盘：<code>sda</code></li>
+<li>类型：<code>sys</code></li>
+<li>抹掉整个硬盘：<code>y</code></li>
+<li><code>reboot</code></li>
+</ol>
+<p>因为 VirtualBox 的原因，重启之后还是用会从镜像启动，这个时候需要在菜单上选择「设备」-&gt;「分配光驱」-&gt;「移除虚拟盘」，忽略警告，然后再次 <code>reboot</code> 才能从硬盘启动。</p>
+<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><ol>
+<li>设置主机名：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">echo</span> Suyun-VM &gt; /etc/hostname</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装必须的软件：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> apk add sudo nano curl bash</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>添加用户和配置 sudo：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> adduser Suyun <span class="comment"># 建议和姐姐机的用户名相同，SSH 命令可以更简洁些</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nano /etc/passwd <span class="comment"># Alpine 不提供 chsh，需要手动修改 shell</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> EDITOR=nano visudo</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> adduser Suyun wheel</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="集成"><a href="#集成" class="headerlink" title="集成"></a>集成</h2><h3 id="自动开关虚拟机"><a href="#自动开关虚拟机" class="headerlink" title="自动开关虚拟机"></a>自动开关虚拟机</h3><p>安装 <a target="_blank" rel="noopener" href="https://www.toptensoftware.com/vboxheadlesstray/">VBoxHeadlessTray</a>，再选择好目标虚拟机，就可以让虚拟机开机自动启动、关机自动关闭了。</p>
+<h3 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h3><p>「设置」-&gt;「网络」-&gt;「高级」-&gt;「端口转发」：将妹妹机的 <code>22</code> 端口转发到姐姐机的 <code>2222</code> 端口。这样就可以在姐姐机上 <code>ssh -p 2222 127.0.0.1</code>  来访问妹妹机了。</p>
+<p>为了在登录时不需要密码，我们还需要设置使用公钥登录（以下操作在姐姐机上进行）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ssh-copy-id -p 2222 127.0.0.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="快捷方式"><a href="#快捷方式" class="headerlink" title="快捷方式"></a>快捷方式</h3><p>「目标」为 <code>&quot;C:\Program Files\Git\usr\bin\mintty.exe&quot; -e /usr/bin/ssh 127.0.0.1 -p 2222</code>。</p>
+<h3 id="剪贴板共享"><a href="#剪贴板共享" class="headerlink" title="剪贴板共享"></a>剪贴板共享</h3><p>在姐姐机上跑一个 RESTful API 操作剪贴板，再在妹妹机上用 <code>curl</code> 封装两个 shell 脚本调用 API 实现复制和粘贴。RESTful API 的代码咱会放在 GitHub 上：<a target="_blank" rel="noopener" href="https://github.com/Suyun514/fuzzy-clipboard">fuzzy-clipboard 路 GitHub</a>。两个 shell 脚本就在这里直接给出了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat /usr/<span class="built_in">local</span>/bin/clipcopy</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">cat | curl -X POST --data-binary @- 192.168.56.1:2547/copy &gt; /dev/null 2&gt; /dev/null # 192.168.56.1 为 VirtualBox 的 NAT 模式中的姐姐机 IP，下同</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat /usr/<span class="built_in">local</span>/bin/clippaste</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">curl http://192.168.56.1:2547/paste</span><br></pre></td></tr></table></figure>
+
+<p>可以看到咱借用了 Oh My Zsh 中相关功能的命名，所以如果有使用 Oh My Zsh 的话需要在 <code>.zshrc</code> 文件中添加这几行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unset -f clipcopy</span><br><span class="line">unset -f clippaste</span><br></pre></td></tr></table></figure>
+
+<p>目前还剩下一个问题：如何让 API 在 Windows 下开机启动？咱采用了一个比较简单粗暴的方法：把下面这个 VBS 文件丢进 <code>shell:startup</code>（假设 <code>app.js</code> 存放在 <code>%HOMEPATH%\projects\fuzzy-clipboard</code>）：</p>
+<figure class="highlight vbs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CreateObject</span>(<span class="string">&quot;WScript.Shell&quot;</span>).Run <span class="string">&quot;node.exe %HOMEPATH%\projects\fuzzy-clipboard\app.js 2547&quot;</span>, <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>咱知道还可以做到更好，比如使用 SSHFS 让姐姐机直接读取妹妹机的文件、在姐姐机上安装 X Server 来使用妹妹机的 GUI、乃至使用 Visual Studio Code 的 Remote - SSH。但咱也知道这些方案在扩展功能的过程中，也带来了一些不完善之处，咱作为一个<del>迫真</del>完美主义者是无法接受的。<del>其实就是咱懒。</del></p>
+<p>最后，尽情享受吧！</p>
+<p><img src="futago-os-setup-guide/screenshot.png" alt="screenshot.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://suyun114.gitlab.io/hexo/2021/05/03/futago-os-setup-guide/" data-id="cko8n9iuq000048pvdwah6hoj" data-title="双子系统环境安装指南" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/hexo/2021/02/08/goodbye-gengzi/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">再见，庚子！</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/Diary/">Diary</a></li><li class="category-list-item"><a class="category-list-link" href="/hexo/categories/Ops/">Ops</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/hexo/archives/2021/02/">二月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/hexo/2021/05/03/futago-os-setup-guide/">双子系统环境安装指南</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2021/02/08/goodbye-gengzi/">再见，庚子！</a>
+          </li>
+        
+          <li>
+            <a href="/hexo/2021/02/04/hello-world/">苏云不知道自己是不是姐姐</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Suyun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/hexo/" class="mobile-nav-link">Home</a>
+  
+    <a href="/hexo/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/hexo/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/hexo/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/hexo/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
